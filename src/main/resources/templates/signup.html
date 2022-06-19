@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/signup.css}">
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<form method="post" th:action="@{/signup/check}" class="form-signup" th:object="${signUpForm}">
+			<h3>新規登録</h3>
+				<div class="form-group">
+					<label for="name">名前</label>
+					<input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid">
+					<div class="invalid-feedback" th:errors="*{name}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="how_to_read">ふりがな</label>
+					<input type="text" class="form-control" th:field="*{read}" th:errorclass="is-invalid">
+					<div class="invalid-feedback" th:errors="*{read}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="birthday">生年月日</label>
+					<input type="date" class="form-control" th:field="*{birthday}" th:errorclass="is-invalid">
+					<div class="invalid-feedback" th:errors="*{birthday}"></div>
+				</div>
+				
+				<div class="form-group">
+					 <input type="radio" th:field="*{gender}" value="M">
+					 <label for="gender">男性</label>
+	 				 <input type="radio" th:field="*{gender}" value="W">
+					 <label for="gender">女性</label>
+					 <input type="checkbox" th:field="*{gender}" value="O">
+					 <label for="radio">その他</label>
+					 <div class="text-danger" th:errors="*{gender}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="tel">電話番号（ハイフンなし）</label>
+					<input type="tel" class="form-control" th:field="*{tel}" th:errorclass="is-invalid">
+					<div class="invalid-feedback" th:errors="*{tel}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="b_id">所属</label>
+					<select class="form-select" th:field="*{b_id}">
+						<option value="" selected>--所属を選択してください--</option>
+						<option value="B01">本社</option>
+						<option value="B02">東海支社</option>
+						<option value="B03">関西支社</option>
+					</select>
+					<div class="text-danger" th:errors="*{b_id}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="d_id">部署</label>
+					<select class="form-select"　th:field="*{d_id}">
+						<option value="" selected>--部署を選択してください--</option>
+						<option value="D01">総務部</option>
+						<option value="D02">営業部</option>
+						<option value="D03">技術部</option>
+					</select>
+					<div class="text-danger" th:errors="*{d_id}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="email">e-mail</label>
+					<input type="email" class="form-control" th:field="*{email}" th:errorclass="is-invalid">
+					<div class="invalid-feedback" th:errors="*{email}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="password">パスワード</label>
+					<input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid">
+					<div class="invalid-feedback" th:errors="*{password}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="other">備考</label>
+					<input type="text" class="form-control" th:field="*{remarks}">
+				</div>
+				
+				<div class="form-group">
+					 <input type="radio" th:field="*{roll}" value="ROLL_ADMIN">
+					 <label for="roll">管理者</label>
+	 				 <input type="radio" th:field="*{roll}" value="ROLL_USER">
+					 <label for="roll">社員</label>
+				</div>
+				
+				<input type="submit" value="登録" class="btn btn-dark w-100 mt-3">
+				
+		</form>
+	</div>	
+
+</body>
+</html>

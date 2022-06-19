@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.form-signup{
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: auto;
+}
+
+h3{
+	margin-bottom: 20px;
+	padding: 1rem 2rem;
+	border-radius: 10px;
+	background-color: #999999;
+	color: #FFFFFF;
+}
+
+.form-group{
+	padding: 15px;
+}
+
+.btn{
+	margin: 10px 0;
+}

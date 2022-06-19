@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.form-list{
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: auto;
+}
+
+h3{
+	margin-top: 10px;
+	padding: 1rem 2rem;
+	border-radius: 10px;
+	background-color: #008080;
+	color: #FFFFFF;
+}
+
+.form-select{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.table{
+	margin: auto;
+	width: 100%;
+	max-width: 700px;
+}
+
+thead{
+	background-color: #008080;
+	color: #FFFFFF;
+}
+/*
+.tr{
+    cursor: pointer;
+}
+ 
+.tr:hover{
+    background-color: #ccc;
+}
+*/

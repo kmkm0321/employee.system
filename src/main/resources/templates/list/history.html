@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" th:href="@{/css/history.css}">
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+	
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>出退勤時刻</th>
+					<th>勤怠</th>
+				</tr>
+			</thead>
+		
+			<tbody>	
+				<tr th:each="list:${list}" class="tr">
+
+					<td th:text="${list.timestamp}"></td>
+					<th:block th:switch="${list.frag}">
+						<td th:case="t" th:text="出勤"></td>
+						<td th:case="f" th:text="退勤"></td>
+					</th:block>
+					
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+
+</body>
+</html>

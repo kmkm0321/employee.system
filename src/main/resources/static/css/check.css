@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.container{
+	padding: 30px;
+	margin: auto;
+	width: 100%;
+	max-width: 800px;
+}
+
+.row{
+	height: 40px;
+}
+
+.btn{
+	margin: 40px;
+	width: 250px;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/recode.css}">
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<form method="post" th:action="@{/service/recode}" class="form-list">
+			<h3>勤務表検索</h3>
+			<div class="form-group">
+				<label>フリーワード（社員名・所属支店等）</label>
+				<input type="text" name="text" class="form-control">
+			</div>
+			<input type="submit" value="検索" class="btn btn-primary w-50 mt-3">
+		</form>
+		<br>
+		
+		<div class="user-list">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>所属</th>
+						<th>部署</th>
+						<th>名前</th>
+						<th>読み仮名</th>
+					</tr>
+				</thead>
+				<tbody>	
+					<tr th:each="page:${page}" class="tr">					
+						<td th:text="${page.b_name}"></td>
+						<td th:text="${page.d_name}"></td>
+						<td><a th:href="@{/service/recode-user(id=${page.id})}" th:text="${page.name}"></a></td>
+						<td th:text="${page.read}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<nav th:if="${page != null}" aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item">
+						<span th:if="${page.isFirst()}" class="page-link">Back</span>
+						<a th:unless="${page.isFirst()}" class="page-link" th:href="@{/service/recode(page=${page.getNumber()-1})}">Back</a>
+					</li>
+					<li th:each="i:${#numbers.sequence(0,page.getTotalPages()-1)}" class="page-item" th:classappend="${i == page.getNumber()} ? active">
+						<a th:text="${i+1}" th:href="@{/service/recode(page=${i})}" class="page-link"></a>
+					</li>
+					<li class="page-item">
+						<span th:if="${page.isLast()}" class="page-link">Next</span>
+						<a th:unless="${page.isLast()}" class="page-link" th:href="@{/service/recode(page=${page.getNumber()+1})}">Next</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		
+	</div>
+
+</body>
+</html>

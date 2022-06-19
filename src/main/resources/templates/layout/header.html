@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:tb="http://www.thymeleaf.org"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet"th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
+
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">HOME</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+				aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>			
+			<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Menu
+						</a>
+						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+							<li><a class="dropdown-item" th:href="@{/logout}">ログアウト</a></li>
+							<li><a class="dropdown-item" href="/list">社員禄</a></li>
+							<li><a class="dropdown-item" th:href="@{/service/recode(access=first)}"　sec:authorize="hasAuthority('ROLL_ADMIN')">勤務表</a></li>
+							<li><a class="dropdown-item" href="/signup" sec:authorize="hasAuthority('ROLL_ADMIN')">社員登録</a></li>
+							<li><a class="dropdown-item" href="#" sec:authorize="hasAuthority('ROLL_ADMIN')">社員情報変更</a></li>
+							<li><a class="dropdown-item" th:href="@{/service/recode-user(id=0)}" sec:authorize="hasAuthority('ROLL_USER')">勤務表</a></li>
+							<li><a class="dropdown-item" href="/attendance" sec:authorize="hasAuthority('ROLL_USER')">出退勤打刻</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>		
+	</nav>
+	
+	<div style="padding: 15px; font-weight: 500;">
+		<span　sec:authorize="hasAuthority('ROLL_USER')"　>
+			<th:block th:switch="principal.b_id">
+				<td th:case="B01" th:text="本社"></td>
+				<td th:case="B02" th:text="東海支社"></td>
+				<td th:case="B03" th:text="関西支社"></td>
+			</th:block>
+		</span>
+		<span　sec:authorize="hasAuthority('ROLL_USER')"　sec:authentication="principal.b_name"></span>
+		<span　sec:authorize="hasAuthority('ROLL_USER')"　sec:authentication="principal.d_name"></span>
+		<span　sec:authorize="hasAuthority('ROLL_ADMIN')">管理者</span>
+		<span　sec:authentication="principal.name"></span>
+	</div>
+	
+	<div layout:fragment="content" th:remove="tag"></div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<script th:src="@{/js/list.js}"></script>
+<script src="webjars/jquery/jquery.min.js"></script>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/list.css}">
+
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div layout:fragment="content">
+		
+		<form method="post" th:action="@{/list}" class="form-list">
+			<h3>社員検索</h3>
+			
+			<label for="branch">所属</label>
+			<select name="branch" class="form-select" id="branch">
+				<option value="" selected>--所属を選択してください--</option>
+				<option value="B01">本社</option>
+				<option value="B02">東海支社</option>
+				<option value="B03">関西支社</option>
+			</select>
+			
+			<label for="department">部署</label>
+			<select name="department" class="form-select"　id="department">
+				<option value="" selected>--部署を選択してください--</option>
+				<option value="D01">総務部</option>
+				<option value="D02">営業部</option>
+				<option value="D03">技術部</option>
+			</select>
+			
+			<input type="submit" value="検索" class="btn btn-primary w-100 mt-3">
+		</form>
+		<br>
+	
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>所属</th>
+					<th>部署</th>
+					<th>名前</th>
+					<th>読み仮名</th>
+					<th>出退勤</th>
+				</tr>
+			</thead>
+		
+			<tbody>	
+				<tr th:each="list:${list}" class="tr" data-href="/list/detail">					
+					<th:block th:switch="${list.b_id}">
+						<td th:case="B01" th:text="本社"></td>
+						<td th:case="B02" th:text="東海支社"></td>
+						<td th:case="B03" th:text="関西支社"></td>
+					</th:block>
+					<th:block th:switch="${list.d_id}">
+						<td th:case="D01" th:text="総務部"></td>
+						<td th:case="D02" th:text="営業部"></td>
+						<td th:case="D03" th:text="技術部"></td>
+					</th:block>
+					<td th:text="${list.name}"></td>
+					<td th:text="${list.read}"></td>
+					<th:block th:switch="${list.status}">
+						<td th:case=t th:text="出勤中"></td>
+						<td th:case=f th:text="ーーー"></td>
+						<td th:case=null th:text="ーーー"></td>
+					</th:block>
+					
+				</tr>
+			</tbody>
+		</table>		
+	</div>
+
+</body>
+</html>

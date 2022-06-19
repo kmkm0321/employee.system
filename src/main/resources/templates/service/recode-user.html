@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<script th:src="@{/js/recode-user.js}"></script>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/recode-user.css}">
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+	
+		<div class="container">
+			<div class="row d-flex align-items-center">
+				<div class="col head">
+				<span>勤務履歴</span>
+				</div>
+				<div class="col user">
+					<span>表示ユーザー：</span>
+					<span th:text="${user.b_name}"></span>
+					<span th:text="${user.d_name}"></span>
+					<span th:text="${user.name}"></span>
+				</div>
+			</div>
+			<div class="row d-flex align-items-center">
+				<div class="col">
+					<input type="button" value="PDF出力" onclick="output()">
+				</div>
+			</div>
+			<div class="row d-flex align-items-center">
+				<div class="col" id="selected">
+					<span th:text="${selected[0]+'年'}"></span>
+					<span th:text="${selected[1]+'月'}"></span>
+				</div>
+				<div class="col">
+					<form method="post" th:action="@{/service/recode-user}" class="form-list" onsubmit="return check()">
+						<select name="year" id="year" class="form-parts">
+						</select>
+						<select name="month" id="month" class="form-parts">
+							<option value="">月</option>
+							<option value="1">1月</option>
+							<option value="2">2月</option>
+							<option value="3">3月</option>
+							<option value="4">4月</option>
+							<option value="5">5月</option>
+							<option value="6">6月</option>
+							<option value="7">7月</option>
+							<option value="8">8月</option>
+							<option value="9">9月</option>
+							<option value="10">10月</option>
+							<option value="11">11月</option>
+							<option value="12">12月</option>
+						</select>
+						<input type="hidden" name="id" th:value="${user.id}">
+						<input type="submit" value="年月指定" class="form-parts">
+					</form>
+				</div>
+			</div>
+			<table>					
+				<thead>
+					<tr>
+						<th>日付</th>
+						<th>勤怠</th>
+						<th>出勤時刻</th>
+						<th>退勤時刻</th>
+						<th>稼働時間</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="workRecode:${listWorkRecode}" class="tr">
+						<th:block th:switch="${workRecode.day_of_week}">
+						<td th:case="土" th:text="${workRecode.date}" class="saturday date"></td>
+						<td th:case="日" th:text="${workRecode.date}" class="sunday date"></td>
+						<td th:case="*" th:text="${workRecode.date}" class="date"></td>
+						</th:block><!-- th:classappend　で複数条件設定すると追加されるクラスが逆になる -->
+						<!-- <td th:text="${workRecode.date}" th:classappend="${workRecode.day_of_week == '土'} ? text-primary"></td> -->
+						<td th:text="${workRecode.attendance}"></td>
+						<td th:text="${workRecode.s_time}"></td>
+						<td th:text="${workRecode.e_time}"></td>
+						<td th:text="${workRecode.w_time}"></td>	
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+
+		<!--
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>出退勤時刻</th>
+					<th>勤怠</th>
+				</tr>
+			</thead>
+	
+			<tbody>
+				<tr th:each="result:${result}" class="tr">
+	
+					<td th:text="${result.timestamp}"></td>
+					<th:block th:switch="${result.frag}">
+						<td th:case="t" th:text="出勤"></td>
+						<td th:case="f" th:text="退勤"></td>
+					</th:block>
+	
+				</tr>
+			</tbody>
+		</table>
+		-->
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/complete.css}">
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		
+		<div th:if="${judgement == true}" class="alert alert-success w-50 mx-auto" role="alert">登録が完了しました</div>
+		<div th:if="${judgement == false}" class="alert alert-danger w-50 mx-auto" role="alert">登録失敗</div>
+		
+	</div>
+
+</body>
+</html>

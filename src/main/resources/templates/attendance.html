@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<script th:src="@{/js/attendance.js}"></script>
+<link rel="stylesheet"th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/attendance.css}">
+
+
+<title>Insert title here</title>
+</head>
+<body onload="current_time()">
+
+	<div layout:fragment="content">
+	
+		<h3 id="time"></h3>
+		
+		<form th:action="@{/attendance}" method="post" class="form-list">
+			<button type="submit" name="attendance" value="1" class="btn btn-success w-25 mt-3" onclick="return beforeSubmit('出勤')">出勤</button>
+			<button type="submit" name="attendance" value="2" class="btn btn-secondary w-25 mt-3" onclick="return beforeSubmit('退勤')">退勤</button>
+		</form>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>出勤時刻</th>
+					<th>退勤時刻</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="recode">
+					<td th:if="${todaysRecode != null}" th:text="${todaysRecode.s_time}"></td>
+					<td th:if="${todaysRecode != null}" th:text="${todaysRecode.e_time}"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${execution == 10}">
+			出勤しました
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${execution == 20}">
+			既に出勤中です
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${execution == 30}">
+			退勤しました
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${execution == 40}">
+			出勤していません
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${execution == 50}">
+			出勤は１日につき１回です
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
+	</div>
+
+</body>
+</html>

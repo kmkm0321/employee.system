@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#time{
+	text-align: center;
+	padding:20px;
+	font-size: 40px;
+}
+
+.form-list{
+	text-align: center;
+	padding: 30px;
+}
+
+table{
+	width: 100%;
+	border: 1px solid black;
+	margin-bottom: 60px;
+	max-width: 500px;
+	margin: auto;
+}
+
+th{
+	border: 1px solid black;
+	background-color: #008080;
+	color: #FFFFFF;
+}
+
+tr,td{
+	border: 1px solid black;
+	text-align: center;
+	font-weight: 400;
+}
+
+.btn{
+	margin: 30px;
+}
+
+.alert{
+	max-width: 300px;
+	margin: auto;
+	margin-top: 30px;
+}

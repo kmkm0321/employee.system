@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.form-login{
+	width: 100%;
+	max-width: 330px;
+	padding: 30px 40px 50px;
+	margin: auto;
+	margin-top: 70px;
+	margin-bottom: 30px;
+	background-color: #eeeeee;
+	border-radius: 50px;
+}
+
+.create{
+	
+}

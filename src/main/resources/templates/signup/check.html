@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/check.css}">
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+	
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-3  d-flex align-items-center">下記の内容で登録します</div>
+				<div class="col-5"></div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">名前</div>
+				<div class="col-5 border d-flex align-items-center" th:text="${signUpForm.name}"></div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">読み仮名</div>
+				<div class="col-5 border d-flex align-items-center" th:text="${signUpForm.read}"></div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">生年月日</div>
+				<div class="col-5 border d-flex align-items-center" th:text="${signUpForm.birthday}"></div>
+			</div>
+			<div class="row justify-content-md-center" th:switch="${signUpForm.gender}">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">性別</div>
+				<div class="col-5 border d-flex align-items-center" th:case="M" th:text="男性"></div>
+				<div class="col-5 border d-flex align-items-center" th:case="W" th:text="女性"></div>
+				<div class="col-5 border d-flex align-items-center" th:case="O" th:text="その他"></div>
+			</div>
+			<div class="row justify-content-md-center" th:switch="${signUpForm.b_id}">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">所属</div>
+				<div class="col-5 border d-flex align-items-center" th:case="B01" th:text="本社"></div>
+				<div class="col-5 border d-flex align-items-center"　th:case="B02" th:text="東海支社"></div>
+				<div class="col-5 border d-flex align-items-center"　th:case="B03" th:text="関西支社"></div>
+			</div>
+			<div class="row justify-content-md-center"　th:switch="${signUpForm.d_id}">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">部署</div>
+				<div class="col-5 border d-flex align-items-center"　th:case="D01" th:text="総務部"></div>
+				<div class="col-5 border d-flex align-items-center"　th:case="D02" th:text="営業部"></div>
+				<div class="col-5 border d-flex align-items-center"　th:case="D03" th:text="技術部"></div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">電話番号</div>
+				<div class="col-5 border d-flex align-items-center" th:text="${signUpForm.tel}"></div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">メールアドレス</div>
+				<div class="col-5 border d-flex align-items-center" th:text="${signUpForm.email}"></div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">パスワード</div>
+				<div class="col-5 border d-flex align-items-center" th:text="${signUpForm.password}"></div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">備考</div>
+				<div class="col-5 border d-flex align-items-center" th:text="${signUpForm.remarks}"></div>
+			</div>
+			<div class="row justify-content-md-center" th:switch="${signUpForm.roll}">
+				<div class="col-3 border d-flex align-items-center bg-secondary text-white">種別</div>
+				<div class="col-5 border d-flex align-items-center" th:case="ROLL_ADMIN" th:text="管理者"></div>
+				<div class="col-5 border d-flex align-items-center" th:case="ROLL_USER" th:text="社員"></div>
+			</div>
+			
+			<div class="text-center">
+				<button type="button" class="btn btn- btn-lg border-dark" onclick="location.href='/signup'"　method="post">キャンセル</button>
+				<button type="button" class="btn btn-dark btn-lg" onclick="location.href='/signup/complete'">登録</button>
+			</div>
+			
+		</div>
+		
+	</div>
+
+</body>
+</html>
